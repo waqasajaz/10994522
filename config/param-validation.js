@@ -2,29 +2,32 @@ import Joi from 'joi';
 
 export default {
   // POST /api/users
-  createUser: {
+  createAnimal: {
     body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+      id: Joi.number().required(),
     }
   },
 
-  // UPDATE /api/users/:userId
-  updateUser: {
+  // UPDATE /api/animal/:animalId
+  addWeight: {
     body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
+      weight: Joi.number().required(),
+      weight_date: Joi.date().iso(),
     },
     params: {
-      userId: Joi.string().hex().required()
+      animalId: Joi.string().hex().required()
     }
   },
 
-  // POST /api/auth/login
-  login: {
-    body: {
-      username: Joi.string().required(),
-      password: Joi.string().required()
+  estimatedWeight: {
+    query: {
+      date: Joi.date().iso().required(),
+    }
+  },
+
+  getAnimal: {
+    params: {
+      animalId: Joi.string().hex().required()
     }
   }
 };
